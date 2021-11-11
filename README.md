@@ -45,6 +45,7 @@ https://www.youtube.com/watch?v=rIVLE3condE
      epoch:2800  loss: 1.296903e-07  
      epoch:2900  loss: 7.401468e-08 
 ***************************************
-**use trained neural net for predict a unseen data**  
+**use trained neural net for predict an unseen data**  
+**[ [3],[3],[3],[3],[3],[3],[3],[3],[3] ]**
 ***************************************
     [[31.999481]]   
