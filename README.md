@@ -7,8 +7,8 @@ https://www.linkedin.com/in/mohammadasadolahi
 **to do**  
 use this repo to predict a regression dataset  
 
-define and train a simple feed forward NN with Gradient Descent (using Tensorflow 2.0 Gradient Tape)  
-if you are new to Gradient descent methods please check out andrew ng's youtube toturial on GD:  
+define and train a simple feed forward NN with Gradient Descent (using Tensorflow 2.0 Gradient Tape)    
+if you are new to Gradient descent methods please check out andrew ng's youtube tutorial on GD:  
 https://www.youtube.com/watch?v=rIVLE3condE  
 
 ***************************************
