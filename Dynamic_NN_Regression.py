@@ -36,3 +36,8 @@ nn=NN(layers=[9,3,5,5,1])
 x=np.array([[1,2],[1,2],[1,2],[1,2],[1,2],[1,2],[1,2],[1,2],[1,2]])
 y=np.array([[12],[22]])
 nn.fit(X=x,Y=y,epoch=3000)
+
+#use out neural net to predict unseen data
+x=np.array([3,3,3,3,3,3,3,3,3])
+x=x[:,np.newaxis]
+print(neuralNet.predict(x).numpy())
