@@ -8,23 +8,16 @@ class NN:
     if activations:
       self.a=activations
     else:
-      for i in  range(len(layers)-1):
+      for i in  range(len(layers)-2):
         self.a.append(tf.nn.relu)
+    self.a.append(tf.keras.activations.linear)
     for i in range(len(layers)-1):
       self.W.append(tf.Variable(tf.random.uniform([layers[i],layers[i+1]],minval=-1,maxval=1),dtype=tf.float32))
       self.B.append(tf.Variable(tf.random.uniform([layers[i+1]],minval=-1,maxval=1),dtype=tf.float32))
-#   def predict(self,X):
-#     Z=tf.Variable(np.transpose(X),dtype=tf.float32)
-#     for w,b,a in zip(self.W,self.B,self.a):
-#       Z=tf.add(tf.matmul(Z,w),b)
-#       Z=a(Z)
-#     return Z
   def predict(self,X):
-    Z=tf.Variable(X,dtype=tf.float32)
+    Z=tf.Variable(np.transpose(X),dtype=tf.float32)
     for w,b,a in zip(self.W,self.B,self.a):
-      # print(tf.transpose(w).shape,Z.shape,tf.matmul(tf.transpose(w),Z).shape,tf.expand_dims(b,axis=1).shape)
-      Z=tf.add(tf.matmul(tf.transpose(w),Z),tf.expand_dims(b,axis=1))
-      # Z=tf.matmul(tf.transpose(w),Z)
+      Z=tf.add(tf.matmul(Z,w),b)
       Z=a(Z)
     return Z
   def loss(self,Y_pred,Y_target):
