@@ -1,7 +1,7 @@
 import tensorflow as tf
 import numpy as np
 class NN:
-  def __init__(self,layers=[9,3,5,5,1],activations=None):
+  def __init__(self,layers=[3,3,2,1],activations=None):
     self.W=[]
     self.B=[]
     self.a=[]
@@ -12,12 +12,12 @@ class NN:
         self.a.append(tf.nn.relu)
     self.a.append(tf.keras.activations.linear)
     for i in range(len(layers)-1):
-      self.W.append(tf.Variable(tf.random.uniform([layers[i],layers[i+1]],minval=-1,maxval=1),dtype=tf.float32))
-      self.B.append(tf.Variable(tf.random.uniform([layers[i+1]],minval=-1,maxval=1),dtype=tf.float32))
+      self.W.append(tf.Variable(tf.random.uniform([layers[i+1],layers[i]],minval=-1,maxval=1),dtype=tf.float32))
+      self.B.append(tf.Variable(tf.random.uniform([layers[i+1],1],minval=-1,maxval=1),dtype=tf.float32))
   def predict(self,X):
-    Z=tf.Variable(np.transpose(X),dtype=tf.float32)
+    Z=tf.Variable(X,dtype=tf.float32)
     for w,b,a in zip(self.W,self.B,self.a):
-      Z=tf.add(tf.matmul(Z,w),b)
+      Z=tf.add(tf.matmul(w,Z),b)
       Z=a(Z)
     return Z
   def loss(self,Y_pred,Y_target):
@@ -33,12 +33,12 @@ class NN:
       if (i%100)==0:
         print(f"epoch:{i}  loss:",cost.numpy())
 
-nn=NN(layers=[9,3,5,5,1])
-x=np.array([[1,2],[1,2],[1,2],[1,2],[1,2],[1,2],[1,2],[1,2],[1,2]])
-y=np.array([[12],[22]])
+nn=NN()
+x=np.array([[1,2,3],[4,5,6],[7,8,9]])
+y=np.array([11,30,48])
 nn.fit(X=x,Y=y,epoch=1000)
 
 #use out neural net to predict unseen data
-x=np.array([3,3,3,3,3,3,3,3,3])
+x=np.array([[10],[11],[12]])
 x=x[:,np.newaxis]
 print(nn.predict(x).numpy())
